@@ -1,0 +1,148 @@
+version: '3.8'
+
+services:
+  # ============================================
+  # NGINX
+  # ============================================
+  nginx:
+    image: nginx:latest
+    container_name: nginx
+    volumes:
+      - ./config/nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+    ports:
+      - "80:80"
+    networks:
+      - app-net
+    depends_on:
+      - client
+    command: >
+      sh -c "sleep 20 && nginx -g 'daemon off;'"
+
+  # ============================================
+  # CLIENT
+  # ============================================
+#   client:
+#     build: ./client
+#     container_name: client
+#     environment:
+#       - VITE_API_BASE_URL=http://localhost
+#       - VITE_AUTH_URL=http://localhost/api/v1/auth/authorize
+#     networks:
+#       - app-net
+#     depends_on:
+#       - service
+
+  # ============================================
+  # SERVICE
+  # ============================================
+  service:
+    build: .
+    container_name: service
+    environment:
+      - SERVER_PORT=8080
+
+      - KEYCLOAK_CLIENT_ID=myclient
+      - KEYCLOAK_CLIENT_SECRET=sYXnZMAiSY4ouudztjv73iHyPr5H0dQC
+      - KEYCLOAK_ISSUER_URI=http://localhost/auth/realms/oAuth
+      - DOCKER_KEYCLOAK_ISSUER_URI=http://keycloak:8080/realms/oAuth
+      - BACKEND_CALLBACK_URI=http://localhost/api/v1/auth/callback
+      - FRONTEND_REDIRECT_URI=http://localhost/callback
+
+      - ACTIVE_PROFILES=docker
+    networks:
+      - app-net
+    depends_on:
+      - keycloak
+      - postgres
+
+  # ============================================
+  # KEYCLOAK
+  # ============================================
+  keycloak:
+    image: quay.io/keycloak/keycloak:26.5.2
+    container_name: keycloak
+    ports:
+      - "9000:8080"
+    volumes:
+      - ./config/keycloak/import:/opt/keycloak/data/import:ro
+    environment:
+      - KC_DB_URL=jdbc:postgresql://postgres:5432/keycloak_db
+      - KC_DB=postgres
+      - KC_DB_USERNAME=dbuser
+      - KC_DB_PASSWORD=password
+      - KC_BOOTSTRAP_ADMIN_USERNAME=admin
+      - KC_BOOTSTRAP_ADMIN_PASSWORD=admin
+      - KC_IMPORT=/opt/keycloak/data/import/realm-export.json
+      - KC_SMTP_FROM=noreply@yourdomain.com
+      - KC_SMTP_HOST=smtp.yandex.ru
+      - KC_SMTP_PORT=465
+      - KC_SMTP_USER=Pavel200-7@yandex.ru
+      - KC_SMTP_PASSWORD=prvepeophfnvnjlm
+      - KC_SMTP_STARTTLS=true
+      - KC_SMTP_AUTH=true
+      - KC_HOSTNAME_URL=http://localhost/auth
+      - KC_HOSTNAME_ADMIN_URL=http://localhost/auth
+      - KC_HOSTNAME_STRICT=false
+      - KC_PROXY=edge
+      - PROXY_ADDRESS_FORWARDING=true
+      - KC_HTTP_ENABLED=true
+      - KC_SPI_COOKIE_DEFAULT_SAMESITE=None
+      - KC_SPI_COOKIE_DEFAULT_SECURE=false
+      - KC_HEALTH_ENABLED=true
+    command:
+      - start-dev
+      - --import-realm
+      - --spi-import-provider-single-file-file=/opt/keycloak/data/import/realm-export.json
+      - --spi-import-provider-single-file-override=false
+    networks:
+      - app-net
+    depends_on:
+      - postgres
+
+  # ============================================
+  # POSTGRES
+  # ============================================
+  postgres:
+    image: postgres:18
+    container_name: postgres
+    ports:
+      - "9090:5432"
+    restart: always
+    volumes:
+      - postgres-db-vol-5:/var/lib/postgresql/data
+      - ./config/postgres/init-multiple-dbs.sql:/docker-entrypoint-initdb.d/init-multiple-dbs.sql:ro
+    environment:
+      POSTGRES_USER: dbuser
+      POSTGRES_PASSWORD: password
+      PGDATA: /var/lib/postgresql/data
+    networks:
+      - app-net
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U dbuser"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
+
+  # ============================================
+  # PGADMIN
+  # ============================================
+  pgadmin:
+    image: dpage/pgadmin4:latest
+    container_name: pgadmin
+    ports:
+      - "5050:80"
+    environment:
+      - PGADMIN_DEFAULT_EMAIL=admin@admin.com
+      - PGADMIN_DEFAULT_PASSWORD=admin
+    networks:
+      - app-net
+    depends_on:
+      - postgres
+
+networks:
+  app-net:
+    driver: bridge
+
+volumes:
+  postgres-db-vol:

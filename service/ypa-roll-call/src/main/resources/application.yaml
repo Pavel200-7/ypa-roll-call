@@ -1,6 +1,8 @@
 spring:
   application:
     name: ypa-roll-call
+  profiles:
+    active: ${ACTIVE_PROFILES:dev}
 
 app:
   keycloak:
@@ -15,3 +17,5 @@ app:
       allowed-origins: ${CORS_ALLOWED_ORIGINS:http://localhost:5173}
       allowed-methods: ${CORS_ALLOWED_METHODS:GET,POST, PUT,DELETE, OPTIONS}
 
+server:
+  port: 8085
