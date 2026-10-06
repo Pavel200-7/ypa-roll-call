@@ -1,3 +1,17 @@
 spring:
   application:
     name: ypa-roll-call
+
+app:
+  keycloak:
+    client-id: ${KEYCLOAK_CLIENT_ID:myclient}
+    client-secret: ${KEYCLOAK_CLIENT_SECRET:sYXnZMAiSY4ouudztjv73iHyPr5H0dQC}
+    out-uri: ${KEYCLOAK_ISSUER_URI:http://localhost/auth/realms/oAuth}
+    docker-uri: ${DOCKER_KEYCLOAK_ISSUER_URI:http://localhost/auth/realms/oAuth}
+    backend-callback-uri: ${BACKEND_CALLBACK_URI:http://localhost:8085/api/v1/auth/callback}
+    frontend-redirect-uri: ${FRONTEND_REDIRECT_URI:http://localhost:5173/callback}
+  cors:
+    cors:
+      allowed-origins: ${CORS_ALLOWED_ORIGINS:http://localhost:5173}
+      allowed-methods: ${CORS_ALLOWED_METHODS:GET,POST, PUT,DELETE, OPTIONS}
+
