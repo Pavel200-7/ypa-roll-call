@@ -4,7 +4,6 @@ import com.example.ypa_roll_call.auth.data.request.LogoutRequestDto;
 import com.example.ypa_roll_call.auth.data.request.RefreshTokenRequestDto;
 import com.example.ypa_roll_call.auth.data.response.LoginResponseDto;
 import com.example.ypa_roll_call.auth.service.KeycloakAuthService;
-import com.example.ypa_roll_call.auth.utils.JwtHelper;
 import com.example.ypa_roll_call.auth.conf.SecurityConfigProperties;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -23,7 +22,6 @@ public class AuthController {
 
     private final KeycloakAuthService keycloakAuthService;
     private final SecurityConfigProperties securityConfig;
-    private final JwtHelper jwtHelper;
 
     @GetMapping("/authorize")
     public ResponseEntity<Void> authorize() {

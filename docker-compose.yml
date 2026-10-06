@@ -1,9 +1,6 @@
 version: '3.8'
 
 services:
-  # ============================================
-  # NGINX
-  # ============================================
   nginx:
     image: nginx:latest
     container_name: nginx
@@ -18,9 +15,6 @@ services:
     command: >
       sh -c "sleep 20 && nginx -g 'daemon off;'"
 
-  # ============================================
-  # CLIENT
-  # ============================================
 #   client:
 #     build: ./client
 #     container_name: client
@@ -32,9 +26,6 @@ services:
 #     depends_on:
 #       - service
 
-  # ============================================
-  # SERVICE
-  # ============================================
   service:
     build: .
     container_name: service
@@ -48,6 +39,10 @@ services:
       - BACKEND_CALLBACK_URI=http://localhost/api/v1/auth/callback
       - FRONTEND_REDIRECT_URI=http://localhost/callback
 
+      - LIVEKIT_URL=http://localhost:7880
+      - LIVEKIT_API_KEY=devkey
+      - LIVEKIT_API_SECRET=secret
+
       - ACTIVE_PROFILES=docker
     networks:
       - app-net
@@ -55,9 +50,6 @@ services:
       - keycloak
       - postgres
 
-  # ============================================
-  # KEYCLOAK
-  # ============================================
   keycloak:
     image: quay.io/keycloak/keycloak:26.5.2
     container_name: keycloak
@@ -99,9 +91,6 @@ services:
     depends_on:
       - postgres
 
-  # ============================================
-  # POSTGRES
-  # ============================================
   postgres:
     image: postgres:18
     container_name: postgres
@@ -124,9 +113,6 @@ services:
       retries: 5
       start_period: 10s
 
-  # ============================================
-  # PGADMIN
-  # ============================================
   pgadmin:
     image: dpage/pgadmin4:latest
     container_name: pgadmin
@@ -139,6 +125,40 @@ services:
       - app-net
     depends_on:
       - postgres
+
+
+livekit:
+  image: livekit/livekit-server:latest
+  container_name: livekit-server
+  restart: unless-stopped
+  command: --dev --config /etc/livekit/livekit.yaml 
+  volumes:
+    - ./config/livekit/livekit.yaml:/etc/livekit/livekit.yaml:ro
+  ports:
+    - "7880:7880"
+    - "7881:7881"
+    - "7882:7882/udp"
+    - "50000-50002:50000-50002/udp"  
+    - "3478:3478"
+  networks:
+    - app-net
+      
+  livekit-dashboard:
+    image: mrgreen007/livekit-dashboard:latest
+    container_name: livekit-dashboard
+    restart: always
+    ports:
+      - "8000:8000"
+    environment:
+      - LIVEKIT_URL=http://livekit:7880
+      - LIVEKIT_API_KEY=devkey
+      - LIVEKIT_API_SECRET=secret
+      - ADMIN_USERNAME=admin
+      - ADMIN_PASSWORD=admin
+      - APP_SECRET_KEY=random_string
+      - CSP_CONNECT_SRC='self' https://cdn.jsdelivr.net
+    networks:
+      - app-net
 
 networks:
   app-net:
