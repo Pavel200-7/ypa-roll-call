@@ -6,7 +6,7 @@ import org.springframework.security.oauth2.server.resource.authentication.JwtAut
 import org.springframework.stereotype.Component;
 
 @Component
-public class JwtClaims {
+public class CurrentUser {
 
     public String getUserId() {
         return getJwt()
@@ -25,5 +25,4 @@ public class JwtClaims {
         }
         throw new IllegalStateException("No JWT token found in security context");
     }
-
 }

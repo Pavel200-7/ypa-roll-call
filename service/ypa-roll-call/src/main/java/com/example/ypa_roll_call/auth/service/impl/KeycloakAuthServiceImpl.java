@@ -3,9 +3,9 @@ package com.example.ypa_roll_call.auth.service.impl;
 
 
 import com.example.ypa_roll_call.auth.conf.SecurityConfigProperties;
-import com.example.ypa_roll_call.auth.data.request.LogoutRequestDto;
-import com.example.ypa_roll_call.auth.data.request.RefreshTokenRequestDto;
-import com.example.ypa_roll_call.auth.data.response.LoginResponseDto;
+import com.example.ypa_roll_call.auth.data.request.LogoutRequest;
+import com.example.ypa_roll_call.auth.data.request.RefreshTokenRequest;
+import com.example.ypa_roll_call.auth.data.response.LoginResponse;
 import com.example.ypa_roll_call.auth.service.KeycloakAuthService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -43,7 +43,7 @@ public class KeycloakAuthServiceImpl implements KeycloakAuthService {
     }
 
     @Override
-    public Mono<LoginResponseDto> exchangeCodeForTokens(String code) {
+    public Mono<LoginResponse> exchangeCodeForTokens(String code) {
         log.info("Exchanging code for tokens");
 
         MultiValueMap<String, String> body = new LinkedMultiValueMap<>();
@@ -68,7 +68,7 @@ public class KeycloakAuthServiceImpl implements KeycloakAuthService {
                 .bodyToMono(new ParameterizedTypeReference<Map<String, Object>>() {})
                 .map(response -> {
                     log.info("Successfully exchanged code for tokens");
-                    return LoginResponseDto.builder()
+                    return LoginResponse.builder()
                             .accessToken((String) response.get("access_token"))
                             .refreshToken((String) response.get("refresh_token"))
                             .expiresIn((Integer) response.get("expires_in"))
@@ -78,7 +78,7 @@ public class KeycloakAuthServiceImpl implements KeycloakAuthService {
     }
 
     @Override
-    public Mono<LoginResponseDto> refreshToken(RefreshTokenRequestDto request) {
+    public Mono<LoginResponse> refreshToken(RefreshTokenRequest request) {
         String refreshToken = request.getRefreshToken();
 
         if (refreshToken == null || refreshToken.trim().isEmpty()) {
@@ -108,7 +108,7 @@ public class KeycloakAuthServiceImpl implements KeycloakAuthService {
                 .bodyToMono(new ParameterizedTypeReference<Map<String, Object>>() {})
                 .map(response -> {
                     log.info("Token refreshed successfully");
-                    return LoginResponseDto.builder()
+                    return LoginResponse.builder()
                             .accessToken((String) response.get("access_token"))
                             .refreshToken((String) response.get("refresh_token"))
                             .expiresIn((Integer) response.get("expires_in"))
@@ -118,7 +118,7 @@ public class KeycloakAuthServiceImpl implements KeycloakAuthService {
     }
 
     @Override
-    public Mono<Void> logout(LogoutRequestDto request) {
+    public Mono<Void> logout(LogoutRequest request) {
         String refreshToken = request.getRefreshToken();
         log.info("Logging out");
 
