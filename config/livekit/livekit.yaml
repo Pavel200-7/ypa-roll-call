@@ -1,0 +1,21 @@
+port: 7880
+bind_addresses:
+  - '0.0.0.0'
+rtc:
+  tcp_port: 7881
+  port_range_start: 50000
+  port_range_end: 50002
+  use_external_ip: true
+room:
+  auto_create: false
+logging:
+  level: info
+turn:
+  enabled: false
+keys:
+  devkey: 'secret'
+
+webhook:
+  api_key: devkey
+  urls:
+    - "http://service:8080/api/v1/livekit/webhook"

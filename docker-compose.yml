@@ -11,7 +11,8 @@ services:
     networks:
       - app-net
     depends_on:
-      - client
+      # - client
+      - keycloak
     command: >
       sh -c "sleep 20 && nginx -g 'daemon off;'"
 
@@ -24,18 +25,19 @@ services:
 #     networks:
 #       - app-net
 #     depends_on:
+#       - keycloak
 #       - service
 
   service:
-    build: .
+    build: ./service/ypa-roll-call
     container_name: service
     environment:
       - SERVER_PORT=8080
 
       - KEYCLOAK_CLIENT_ID=myclient
-      - KEYCLOAK_CLIENT_SECRET=sYXnZMAiSY4ouudztjv73iHyPr5H0dQC
+      - KEYCLOAK_CLIENT_SECRET=Pn7UVuZByzwUYL2xsjUo4lB8CKo3qiELbqRoIOLa5KW2a00mCyZRoSajqcnN3pmbW0oG6oRP7gnyTJGBLWOAby
       - KEYCLOAK_ISSUER_URI=http://localhost/auth/realms/oAuth
-      - DOCKER_KEYCLOAK_ISSUER_URI=http://keycloak:8080/realms/oAuth
+      - DOCKER_KEYCLOAK_ISSUER_URI=http://keycloak:8080/auth/realms/oAuth
       - BACKEND_CALLBACK_URI=http://localhost/api/v1/auth/callback
       - FRONTEND_REDIRECT_URI=http://localhost/callback
 
@@ -51,43 +53,47 @@ services:
       - postgres
 
   keycloak:
-    image: quay.io/keycloak/keycloak:26.5.2
+    image: quay.io/keycloak/keycloak:26.8.0
     container_name: keycloak
     ports:
       - "9000:8080"
     volumes:
       - ./config/keycloak/import:/opt/keycloak/data/import:ro
     environment:
+      - KC_IMPORT=/opt/keycloak/data/import/realm-export.json
+
       - KC_DB_URL=jdbc:postgresql://postgres:5432/keycloak_db
       - KC_DB=postgres
       - KC_DB_USERNAME=dbuser
       - KC_DB_PASSWORD=password
+
       - KC_BOOTSTRAP_ADMIN_USERNAME=admin
       - KC_BOOTSTRAP_ADMIN_PASSWORD=admin
-      - KC_IMPORT=/opt/keycloak/data/import/realm-export.json
-      - KC_SMTP_FROM=noreply@yourdomain.com
-      - KC_SMTP_HOST=smtp.yandex.ru
-      - KC_SMTP_PORT=465
-      - KC_SMTP_USER=Pavel200-7@yandex.ru
-      - KC_SMTP_PASSWORD=prvepeophfnvnjlm
-      - KC_SMTP_STARTTLS=true
-      - KC_SMTP_AUTH=true
-      - KC_HOSTNAME_URL=http://localhost/auth
-      - KC_HOSTNAME_ADMIN_URL=http://localhost/auth
-      - KC_HOSTNAME_STRICT=false
-      - KC_PROXY=edge
-      - PROXY_ADDRESS_FORWARDING=true
+      
+      - KC_HOSTNAME=http://localhost/auth
+      - KC_HOSTNAME_PATH=/auth
+      - KC_HTTP_RELATIVE_PATH=/auth
+      - KC_PROXY_HEADERS=xforwarded
+
       - KC_HTTP_ENABLED=true
+
       - KC_SPI_COOKIE_DEFAULT_SAMESITE=None
       - KC_SPI_COOKIE_DEFAULT_SECURE=false
+
+      # --KC_HOSTNAMR_BACKCHANNEL_DYNAMIC=true
+
       - KC_HEALTH_ENABLED=true
     command:
       - start-dev
       - --import-realm
-      - --spi-import-provider-single-file-file=/opt/keycloak/data/import/realm-export.json
-      - --spi-import-provider-single-file-override=false
     networks:
       - app-net
+    healthcheck:
+      test: ["CMD-SHELL", "exec 3<>/dev/tcp/127.0.0.1/9000; echo -e 'GET /auth/health/ready HTTP/1.1\r\nhost: localhost\r\nConnection: close\r\n\r\n' >&3; grep -q '200 OK' <&3"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 60s
     depends_on:
       - postgres
 
@@ -98,7 +104,7 @@ services:
       - "9090:5432"
     restart: always
     volumes:
-      - postgres-db-vol-5:/var/lib/postgresql/data
+      - postgres-db-vol:/var/lib/postgresql/data
       - ./config/postgres/init-multiple-dbs.sql:/docker-entrypoint-initdb.d/init-multiple-dbs.sql:ro
     environment:
       POSTGRES_USER: dbuser
@@ -126,21 +132,20 @@ services:
     depends_on:
       - postgres
 
-
-livekit:
-  image: livekit/livekit-server:latest
-  container_name: livekit-server
-  restart: unless-stopped
-  command: --dev --config /etc/livekit/livekit.yaml 
-  volumes:
+  livekit:
+    image: livekit/livekit-server:latest
+    container_name: livekit-server
+    restart: unless-stopped
+    command: --dev --config /etc/livekit/livekit.yaml 
+    volumes:
     - ./config/livekit/livekit.yaml:/etc/livekit/livekit.yaml:ro
-  ports:
+    ports:
     - "7880:7880"
     - "7881:7881"
     - "7882:7882/udp"
     - "50000-50002:50000-50002/udp"  
     - "3478:3478"
-  networks:
+    networks:
     - app-net
       
   livekit-dashboard:
@@ -148,17 +153,17 @@ livekit:
     container_name: livekit-dashboard
     restart: always
     ports:
-      - "8000:8000"
+    - "8000:8000"
     environment:
-      - LIVEKIT_URL=http://livekit:7880
-      - LIVEKIT_API_KEY=devkey
-      - LIVEKIT_API_SECRET=secret
-      - ADMIN_USERNAME=admin
-      - ADMIN_PASSWORD=admin
-      - APP_SECRET_KEY=random_string
-      - CSP_CONNECT_SRC='self' https://cdn.jsdelivr.net
+    - LIVEKIT_URL=http://livekit:7880
+    - LIVEKIT_API_KEY=devkey
+    - LIVEKIT_API_SECRET=secret
+    - ADMIN_USERNAME=admin
+    - ADMIN_PASSWORD=admin
+    - APP_SECRET_KEY=random_string
+    - CSP_CONNECT_SRC='self' https://cdn.jsdelivr.net
     networks:
-      - app-net
+    - app-net
 
 networks:
   app-net:
