@@ -35,11 +35,14 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http)
             throws Exception {
         http
-                .cors(cors -> cors.configurationSource(corsConfigurationSource))
+//                .cors(cors -> cors.configurationSource(corsConfigurationSource))
+                .cors(cors -> cors.disable())
+
                 .csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests((authorize) -> authorize
                         .requestMatchers("/api/v1/auth/**").permitAll()
                         .requestMatchers("/api/v1/livekit/webhook").permitAll()
+                        .requestMatchers("/error").permitAll()
                         .anyRequest().authenticated()
                 )
                 .oauth2ResourceServer(oauth2 -> oauth2
@@ -62,19 +65,19 @@ public class SecurityConfig {
     public JwtAuthenticationConverter jwtAuthenticationConverter() {
         JwtAuthenticationConverter jwtAuthenticationConverter = new JwtAuthenticationConverter();
         JwtGrantedAuthoritiesConverter jwtGrantedAuthoritiesConverter = new JwtGrantedAuthoritiesConverter();
-        jwtAuthenticationConverter.setJwtGrantedAuthoritiesConverter(jwt -> {
-            var authorities = jwtGrantedAuthoritiesConverter.convert(jwt);
-            var roles = jwt.getClaimAsStringList("spring_sec_roles");
-
-            return Stream.concat(
-                    authorities.stream(),
-                    roles.stream()
-                            .filter(role -> role != null && !role.isEmpty())
-                            .map(role -> "ROLE_" + role.toUpperCase())
-                            .map(SimpleGrantedAuthority::new)
-                            .map(GrantedAuthority.class::cast)
-            ).toList();
-        });
+//        jwtAuthenticationConverter.setJwtGrantedAuthoritiesConverter(jwt -> {
+//            var authorities = jwtGrantedAuthoritiesConverter.convert(jwt);
+//            var roles = jwt.getClaimAsStringList("spring_sec_roles");
+//
+//            return Stream.concat(
+//                    authorities.stream(),
+//                    roles.stream()
+//                            .filter(role -> role != null && !role.isEmpty())
+//                            .map(role -> "ROLE_" + role.toUpperCase())
+//                            .map(SimpleGrantedAuthority::new)
+//                            .map(GrantedAuthority.class::cast)
+//            ).toList();
+//        });
         return jwtAuthenticationConverter;
     }
 
@@ -88,5 +91,4 @@ public class SecurityConfig {
         );
         return decoder;
     }
-
 }

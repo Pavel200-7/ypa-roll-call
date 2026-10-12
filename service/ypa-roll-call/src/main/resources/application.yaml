@@ -13,9 +13,8 @@ app:
     backend-callback-uri: ${BACKEND_CALLBACK_URI:http://localhost:8085/api/v1/auth/callback}
     frontend-redirect-uri: ${FRONTEND_REDIRECT_URI:http://localhost:5173/callback}
   cors:
-    cors:
-      allowed-origins: ${CORS_ALLOWED_ORIGINS:http://localhost:5173}
-      allowed-methods: ${CORS_ALLOWED_METHODS:GET,POST, PUT,DELETE, OPTIONS}
+    allowed-origins: ${CORS_ALLOWED_ORIGINS:http://localhost:5173}
+    allowed-methods: ${CORS_ALLOWED_METHODS:GET,POST, PUT,DELETE, OPTIONS}
 
 livekit:
   url: ${LIVEKIT_URL:http://localhost:7880}
@@ -24,3 +23,13 @@ livekit:
 
 server:
   port: 8085
+
+logging:
+  level:
+    org.springframework.web.cors: TRACE
+    org.springframework.security: TRACE
+    org.springframework.security.web.FilterChainProxy: DEBUG
+    org.springframework.security.web.csrf: DEBUG
+    org.springframework.security.web.access: DEBUG
+    org.springframework.security.web.authentication: DEBUG
+    org.springframework.security.oauth2: DEBUG

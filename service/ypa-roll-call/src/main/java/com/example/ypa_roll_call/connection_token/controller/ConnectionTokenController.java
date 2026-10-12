@@ -23,6 +23,15 @@ public class ConnectionTokenController {
         return ResponseEntity.ok(connectionToken);
     }
 
+    @PostMapping("/admin/{roomId}")
+    public ResponseEntity<ConnectionTokenResponse> getAdminTokenForExistingRoom(
+            @PathVariable String roomId
+    ) throws IOException {
+        ConnectionTokenResponse token = connectionTokenService
+                .getAdminConnectionTokenForRoom(roomId);
+        return ResponseEntity.ok(token);
+    }
+
     @GetMapping("/participant/{roomId}")
     public ResponseEntity<ConnectionTokenResponse> getParticipantToken(@PathVariable String roomId) throws IOException {
         ConnectionTokenResponse connectionToken = connectionTokenService.getParticipantConnectionToken(roomId);

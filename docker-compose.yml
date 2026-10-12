@@ -39,13 +39,16 @@ services:
       - KEYCLOAK_ISSUER_URI=http://localhost/auth/realms/oAuth
       - DOCKER_KEYCLOAK_ISSUER_URI=http://keycloak:8080/auth/realms/oAuth
       - BACKEND_CALLBACK_URI=http://localhost/api/v1/auth/callback
-      - FRONTEND_REDIRECT_URI=http://localhost/callback
+      - FRONTEND_REDIRECT_URI=http://localhost:5173/callback
 
-      - LIVEKIT_URL=http://localhost:7880
+      - LIVEKIT_URL=http://livekit:7880
       - LIVEKIT_API_KEY=devkey
       - LIVEKIT_API_SECRET=secret
 
       - ACTIVE_PROFILES=docker
+
+      - CORS_ALLOWED_ORIGINS=http://localhost:5173
+      - CORS_ALLOWED_METHODS=GET,POST,PUT,DELETE,OPTIONS
     networks:
       - app-net
     depends_on:

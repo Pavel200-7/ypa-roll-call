@@ -3,6 +3,7 @@ package com.example.ypa_roll_call.connection_token.service.impl;
 import com.example.ypa_roll_call.auth.utils.CurrentUser;
 import com.example.ypa_roll_call.common.conf.LiveKitProperties;
 import com.example.ypa_roll_call.common.enums.ParticipantRole;
+import com.example.ypa_roll_call.common.exception.room.RoomNotFoundException;
 import com.example.ypa_roll_call.common.util.ParticipantMetadataEncoder;
 import com.example.ypa_roll_call.connection_token.data.response.ConnectionTokenResponse;
 import com.example.ypa_roll_call.connection_token.service.ConnectionTokenService;
@@ -39,7 +40,21 @@ public class ConnectionTokenServiceImpl implements ConnectionTokenService {
     }
 
     @Override
-    public ConnectionTokenResponse getParticipantConnectionToken(String roomId) {
+    public ConnectionTokenResponse getAdminConnectionTokenForRoom(String roomId) throws IOException {
+        if (!roomService.roomExists(roomId)) {
+            throw new RoomNotFoundException("This room does not exist");
+        }
+        AccessToken token = getAccessTokenToken(roomId);
+        token.addGrants(new RoomAdmin(true));
+        token.setMetadata(metaDataEncoder.encode(ParticipantRole.ADMIN));
+        return new ConnectionTokenResponse(token.toJwt());
+    }
+
+    @Override
+    public ConnectionTokenResponse getParticipantConnectionToken(String roomId) throws IOException {
+        if (!roomService.roomExists(roomId)) {
+            throw new RoomNotFoundException("This room does not exist");
+        }
         AccessToken token = getAccessTokenToken(roomId);
         token.addGrants(new CanUpdateOwnMetadata(false));
         return new ConnectionTokenResponse(token.toJwt());
