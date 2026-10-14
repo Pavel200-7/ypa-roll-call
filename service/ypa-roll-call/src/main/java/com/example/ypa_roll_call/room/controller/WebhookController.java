@@ -1,5 +1,6 @@
 package com.example.ypa_roll_call.room.controller;
 
+import com.example.ypa_roll_call.common.exception.base.BusinessRuleException;
 import com.example.ypa_roll_call.room.service.WebhookEventHandlerFactory;
 import io.livekit.server.WebhookReceiver;
 import livekit.LivekitWebhook.WebhookEvent;
@@ -7,6 +8,8 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.AccessDeniedException;
+import org.springframework.security.core.AuthenticationException;
 import org.springframework.web.bind.annotation.*;
 
 @Slf4j
@@ -25,7 +28,7 @@ public class WebhookController {
             event = webhookReceiver.receive(body, authHeader);
         } catch (Exception e) {
             log.warn("Invalid webhook signature", e);
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+            throw new BusinessRuleException("Invalid webhook signature");
         }
 
         log.info("LiveKit Webhook: {}", event.getEvent());

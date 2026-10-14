@@ -3,6 +3,22 @@ spring:
     name: ypa-roll-call
   profiles:
     active: ${ACTIVE_PROFILES:dev}
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: ${DB_URL:jdbc:postgresql://localhost:9090/service_db}
+    username: ${DB_USERNAME:dbuser}
+    password: ${DB_PASSWORD:password}
+  jpa:
+    hibernate:
+      ddl-auto: validate
+
+flyway:
+  schemas: public
+  target: latest
+  validateOnMigrate: true
+  installedBy: Pavel200-7
+  locations: classpath:db/migration
+  baseline-on-migrate: true
 
 app:
   keycloak:
@@ -24,12 +40,13 @@ livekit:
 server:
   port: 8085
 
-logging:
-  level:
-    org.springframework.web.cors: TRACE
-    org.springframework.security: TRACE
-    org.springframework.security.web.FilterChainProxy: DEBUG
-    org.springframework.security.web.csrf: DEBUG
-    org.springframework.security.web.access: DEBUG
-    org.springframework.security.web.authentication: DEBUG
-    org.springframework.security.oauth2: DEBUG
+#logging:
+#  level:
+#    com.example.ypa_roll_call: DEBUG
+#    org.springframework.web.cors: TRACE
+#    org.springframework.security: TRACE
+#    org.springframework.security.web.FilterChainProxy: DEBUG
+#    org.springframework.security.web.csrf: DEBUG
+#    org.springframework.security.web.access: DEBUG
+#    org.springframework.security.web.authentication: DEBUG
+#    org.springframework.security.oauth2: DEBUG

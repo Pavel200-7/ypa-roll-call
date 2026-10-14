@@ -1,4 +1,4 @@
-package com.example.ypa_roll_call.common.data;
+package com.example.ypa_roll_call.room.data.common;
 
 import lombok.Data;
 

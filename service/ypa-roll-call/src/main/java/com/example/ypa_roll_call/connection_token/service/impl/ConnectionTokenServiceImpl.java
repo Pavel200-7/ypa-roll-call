@@ -1,77 +1,58 @@
 package com.example.ypa_roll_call.connection_token.service.impl;
 
 import com.example.ypa_roll_call.auth.utils.CurrentUser;
-import com.example.ypa_roll_call.common.conf.LiveKitProperties;
-import com.example.ypa_roll_call.common.enums.ParticipantRole;
 import com.example.ypa_roll_call.common.exception.room.RoomNotFoundException;
-import com.example.ypa_roll_call.common.util.ParticipantMetadataEncoder;
+import com.example.ypa_roll_call.common.logging.annotation.LogOperation;
 import com.example.ypa_roll_call.connection_token.data.response.ConnectionTokenResponse;
 import com.example.ypa_roll_call.connection_token.service.ConnectionTokenService;
-import com.example.ypa_roll_call.common.data.RoomOptions;
+import com.example.ypa_roll_call.connection_token.util.AccessTokenFactory;
+import com.example.ypa_roll_call.room.data.common.RoomOptions;
+import com.example.ypa_roll_call.room.data.request.CreateRoomDto;
+import com.example.ypa_roll_call.room.data.response.RoomDto;
 import com.example.ypa_roll_call.room.service.RoomService;
 import io.livekit.server.*;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
-import java.io.IOException;
-import java.util.List;
 import java.util.UUID;
 
 @Slf4j
 @Service
 @RequiredArgsConstructor
 public class ConnectionTokenServiceImpl implements ConnectionTokenService {
-    private final LiveKitProperties properties;
     private final CurrentUser currentUser;
     private final RoomService roomService;
-    private final ParticipantMetadataEncoder metaDataEncoder;
+    private final AccessTokenFactory tokenFactory;
 
     @Override
-    public ConnectionTokenResponse getAdminConnectionToken(RoomOptions options) throws IOException {
-        String newRoomId = UUID.randomUUID().toString();
+    @LogOperation("ISSUE_ADMIN_TOKEN")
+    public ConnectionTokenResponse getAdminConnectionToken(RoomOptions options) {
+        CreateRoomDto createDto = new CreateRoomDto(currentUser.getUserId(), options);
+        RoomDto room = roomService.createRoom(createDto);
 
-        roomService.createRoom(newRoomId, options);
-
-        AccessToken token = getAccessTokenToken(newRoomId);
-        token.addGrants(new RoomAdmin(true));
-        token.setMetadata(metaDataEncoder.encode(ParticipantRole.ADMIN));
-        return new ConnectionTokenResponse(token.toJwt());
-    }
-
-    @Override
-    public ConnectionTokenResponse getAdminConnectionTokenForRoom(String roomId) throws IOException {
-        if (!roomService.roomExists(roomId)) {
-            throw new RoomNotFoundException("This room does not exist");
-        }
-        AccessToken token = getAccessTokenToken(roomId);
-        token.addGrants(new RoomAdmin(true));
-        token.setMetadata(metaDataEncoder.encode(ParticipantRole.ADMIN));
-        return new ConnectionTokenResponse(token.toJwt());
-    }
-
-    @Override
-    public ConnectionTokenResponse getParticipantConnectionToken(String roomId) throws IOException {
-        if (!roomService.roomExists(roomId)) {
-            throw new RoomNotFoundException("This room does not exist");
-        }
-        AccessToken token = getAccessTokenToken(roomId);
-        token.addGrants(new CanUpdateOwnMetadata(false));
-        return new ConnectionTokenResponse(token.toJwt());
-    }
-
-
-    private AccessToken getAccessTokenToken(String roomId) {
-        AccessToken token = new AccessToken(properties.getApiKey(), properties.getApiSecret());
-        token.setIdentity(currentUser.getUserId());
-        token.addGrants(
-                new RoomName(roomId),
-                new RoomJoin(true),
-                new CanSubscribe(true),
-                new CanPublishData(true),
-                new CanPublish(true),
-                new CanPublishSources(List.of("camera", "microphone", "screen_share", "screen_share_audio"))
+        String jwt = tokenFactory.createAdminToken(
+                room.getRoomId(),
+                currentUser.getUserIdAsString()
         );
-        return token;
+
+        return new ConnectionTokenResponse(jwt);
+    }
+
+    @Override
+    @LogOperation("ISSUE_CONNECTION_TOKEN")
+    public ConnectionTokenResponse getParticipantConnectionToken(UUID roomId) {
+        if (!roomService.roomExists(roomId)) {
+            throw new RoomNotFoundException(roomId);
+        }
+        boolean isAdmin = roomService.getRoomAdmin(roomId)
+                .equals(currentUser.getUserId());
+
+        String identity = currentUser.getUserIdAsString();
+        String jwt = isAdmin
+                ? tokenFactory.createAdminToken(roomId, identity)
+                : tokenFactory.createParticipantToken(roomId, identity);
+
+        return new ConnectionTokenResponse(jwt);
     }
 }

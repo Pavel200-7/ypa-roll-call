@@ -1,2 +1,6 @@
 CREATE DATABASE keycloak_db;
 GRANT ALL PRIVILEGES ON DATABASE keycloak_db TO dbuser;
+
+CREATE DATABASE service_db;
+GRANT ALL PRIVILEGES ON DATABASE service_db TO dbuser;
+

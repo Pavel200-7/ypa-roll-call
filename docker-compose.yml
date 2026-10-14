@@ -34,6 +34,10 @@ services:
     environment:
       - SERVER_PORT=8080
 
+      - DB_URL=jdbc:postgresql://postgres:5432/service_db
+      - DB_USERNAME=dbuser
+      - DB_PASSWORD=password
+
       - KEYCLOAK_CLIENT_ID=myclient
       - KEYCLOAK_CLIENT_SECRET=Pn7UVuZByzwUYL2xsjUo4lB8CKo3qiELbqRoIOLa5KW2a00mCyZRoSajqcnN3pmbW0oG6oRP7gnyTJGBLWOAby
       - KEYCLOAK_ISSUER_URI=http://localhost/auth/realms/oAuth

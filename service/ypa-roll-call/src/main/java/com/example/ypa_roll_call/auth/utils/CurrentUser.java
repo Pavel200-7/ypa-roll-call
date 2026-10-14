@@ -5,13 +5,20 @@ import org.springframework.security.oauth2.jwt.Jwt;
 import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationToken;
 import org.springframework.stereotype.Component;
 
+import java.util.UUID;
+
 @Component
 public class CurrentUser {
 
-    public String getUserId() {
+    public UUID getUserId() {
+        return UUID.fromString(getUserIdAsString());
+    }
+
+    public String getUserIdAsString() {
         return getJwt()
                 .getClaimAsString(Claims.USER_ID);
     }
+
 
     public String getUserName() {
         return getJwt()

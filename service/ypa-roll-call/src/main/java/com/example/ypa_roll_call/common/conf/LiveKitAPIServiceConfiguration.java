@@ -8,7 +8,6 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 @RequiredArgsConstructor
 public class LiveKitAPIServiceConfiguration {
-
     private final LiveKitProperties properties;
 
     @Bean
