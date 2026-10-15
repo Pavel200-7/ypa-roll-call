@@ -3,10 +3,12 @@ package com.example.ypa_roll_call.connection_token.util;
 import com.example.ypa_roll_call.common.conf.LiveKitProperties;
 import com.example.ypa_roll_call.common.enums.ParticipantRole;
 import com.example.ypa_roll_call.common.util.ParticipantMetadataEncoder;
+import com.example.ypa_roll_call.room.enums.RestrictionType;
 import io.livekit.server.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -14,38 +16,64 @@ import java.util.UUID;
 @RequiredArgsConstructor
 public class AccessTokenFactory {
 
-    private static final List<String> PUBLISH_SOURCES = List.of(
+    private static final List<String> ALL_PUBLISH_SOURCES = List.of(
             "camera", "microphone", "screen_share", "screen_share_audio"
     );
 
     private final LiveKitProperties properties;
     private final ParticipantMetadataEncoder metaDataEncoder;
 
-    /**
-     * Токен администратора комнаты.
-     */
     public String createAdminToken(UUID roomId, String identity) {
-        AccessToken token = createBaseToken(roomId, identity);
+        AccessToken token = createBaseToken(roomId, identity, ALL_PUBLISH_SOURCES, true);
         token.addGrants(new RoomAdmin(true));
         token.setMetadata(metaDataEncoder.encode(ParticipantRole.ADMIN));
         return token.toJwt();
     }
 
-    /**
-     * Токен участника комнаты.
-     */
-    public String createParticipantToken(UUID roomId, String identity) {
-        AccessToken token = createBaseToken(roomId, identity);
+    public String createParticipantToken(
+            UUID roomId,
+            String identity,
+            List<RestrictionType> restrictions
+    ) {
+        List<String> sources = applyRestrictions(restrictions);
+
+        // Если после применения ограничений источников не осталось —
+        // canPublish вообще не выдаём
+        boolean canPublish = !sources.isEmpty();
+
+        AccessToken token = createBaseToken(roomId, identity, sources, canPublish);
         token.addGrants(new CanUpdateOwnMetadata(false));
         token.setMetadata(metaDataEncoder.encode(ParticipantRole.PARTICIPANT));
         return token.toJwt();
     }
 
     /**
-     * Базовый токен для подключения к комнате.
-     * Без admin-прав, без специфичной роли.
+     * Возвращает список разрешённых источников после применения ограничений.
+     * BLOCK обрабатывается вызывающим кодом (403), здесь не участвует.
      */
-    private AccessToken createBaseToken(UUID roomId, String identity) {
+    private List<String> applyRestrictions(List<RestrictionType> restrictions) {
+        List<String> sources = new ArrayList<>(ALL_PUBLISH_SOURCES);
+
+        if (restrictions.contains(RestrictionType.MUTE_MICROPHONE)) {
+            sources.remove("microphone");
+        }
+        if (restrictions.contains(RestrictionType.MUTE_CAMERA)) {
+            sources.remove("camera");
+        }
+        if (restrictions.contains(RestrictionType.MUTE_SCREEN_SHARE)) {
+            sources.remove("screen_share");
+            sources.remove("screen_share_audio");
+        }
+
+        return sources;
+    }
+
+    private AccessToken createBaseToken(
+            UUID roomId,
+            String identity,
+            List<String> publishSources,
+            boolean canPublish
+    ) {
         AccessToken token = new AccessToken(
                 properties.getApiKey(),
                 properties.getApiSecret()
@@ -55,10 +83,16 @@ public class AccessTokenFactory {
                 new RoomName(roomId.toString()),
                 new RoomJoin(true),
                 new CanSubscribe(true),
-                new CanPublishData(true),
-                new CanPublish(true),
-                new CanPublishSources(PUBLISH_SOURCES)
+                new CanPublishData(true)
         );
+
+        if (canPublish) {
+            token.addGrants(new CanPublish(true));
+            if (!publishSources.isEmpty()) {
+                token.addGrants(new CanPublishSources(publishSources));
+            }
+        }
+
         return token;
     }
 }

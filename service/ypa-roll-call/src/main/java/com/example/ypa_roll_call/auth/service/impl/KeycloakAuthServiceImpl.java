@@ -3,8 +3,8 @@ package com.example.ypa_roll_call.auth.service.impl;
 
 
 import com.example.ypa_roll_call.auth.conf.SecurityConfigProperties;
-import com.example.ypa_roll_call.auth.data.request.LogoutRequest;
-import com.example.ypa_roll_call.auth.data.request.RefreshTokenRequest;
+import com.example.ypa_roll_call.auth.data.request.LogoutDto;
+import com.example.ypa_roll_call.auth.data.request.RefreshTokenDto;
 import com.example.ypa_roll_call.auth.data.response.LoginResponse;
 import com.example.ypa_roll_call.auth.service.KeycloakAuthService;
 import lombok.RequiredArgsConstructor;
@@ -78,7 +78,7 @@ public class KeycloakAuthServiceImpl implements KeycloakAuthService {
     }
 
     @Override
-    public Mono<LoginResponse> refreshToken(RefreshTokenRequest request) {
+    public Mono<LoginResponse> refreshToken(RefreshTokenDto request) {
         String refreshToken = request.getRefreshToken();
 
         if (refreshToken == null || refreshToken.trim().isEmpty()) {
@@ -118,7 +118,7 @@ public class KeycloakAuthServiceImpl implements KeycloakAuthService {
     }
 
     @Override
-    public Mono<Void> logout(LogoutRequest request) {
+    public Mono<Void> logout(LogoutDto request) {
         String refreshToken = request.getRefreshToken();
         log.info("Logging out");
 

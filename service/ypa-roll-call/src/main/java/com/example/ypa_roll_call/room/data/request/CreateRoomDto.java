@@ -5,11 +5,8 @@ import lombok.*;
 
 import java.util.UUID;
 
-@Value
-@Builder
-@NoArgsConstructor(force = true, access = AccessLevel.PRIVATE)
-@AllArgsConstructor
+@Data
 public class CreateRoomDto {
-    private UUID adminId;
-    private RoomOptions options;
+    private final UUID adminId;
+    private final RoomOptions options;
 }

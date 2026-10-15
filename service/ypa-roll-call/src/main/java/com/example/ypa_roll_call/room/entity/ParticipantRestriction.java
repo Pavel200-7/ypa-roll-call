@@ -27,9 +27,6 @@ public class ParticipantRestriction extends BaseEntity {
     @Column(name = "participant_id", nullable = false, updatable = false)
     private UUID participantId;
 
-    @Column(name = "created_by", nullable = false, updatable = false)
-    private UUID createdBy;
-
     @ElementCollection(fetch = FetchType.EAGER)
     @CollectionTable(
             name = "participant_restriction_types",
@@ -41,15 +38,13 @@ public class ParticipantRestriction extends BaseEntity {
 
     public ParticipantRestriction(
             UUID roomId,
-            UUID participantId,
-            UUID createdBy
+            UUID participantId
     ) {
         this.id = UUID.randomUUID();
         this.roomId = roomId;
         this.participantId = participantId;
-        this.createdBy = createdBy;
     }
-    
+
     public void addRestriction(RestrictionType type) {
         this.restrictions.add(type);
     }

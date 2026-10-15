@@ -9,6 +9,6 @@ import java.util.UUID;
 @NoArgsConstructor(force = true, access = AccessLevel.PRIVATE)
 @AllArgsConstructor
 public class RoomDto {
-    private UUID roomId;
-    private UUID adminId;
+    private final UUID roomId;
+    private final UUID adminId;
 }

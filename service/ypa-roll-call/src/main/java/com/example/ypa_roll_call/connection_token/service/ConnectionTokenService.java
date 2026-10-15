@@ -1,12 +1,13 @@
 package com.example.ypa_roll_call.connection_token.service;
 
-import com.example.ypa_roll_call.connection_token.data.response.ConnectionTokenResponse;
+import com.example.ypa_roll_call.common.exception.room.ParticipantBlockedException;
+import com.example.ypa_roll_call.connection_token.data.response.ConnectionTokenDto;
 import com.example.ypa_roll_call.room.data.common.RoomOptions;
 
-import java.io.IOException;
+import java.nio.file.AccessDeniedException;
 import java.util.UUID;
 
 public interface ConnectionTokenService {
-    ConnectionTokenResponse getAdminConnectionToken(RoomOptions options);
-    ConnectionTokenResponse getParticipantConnectionToken(UUID roomId);
+    ConnectionTokenDto getAdminConnectionToken(RoomOptions options);
+    ConnectionTokenDto getParticipantConnectionToken(UUID roomId) throws ParticipantBlockedException;
 }

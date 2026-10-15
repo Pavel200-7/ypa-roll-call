@@ -1,7 +1,7 @@
 package com.example.ypa_roll_call.auth.controller;
 
-import com.example.ypa_roll_call.auth.data.request.LogoutRequest;
-import com.example.ypa_roll_call.auth.data.request.RefreshTokenRequest;
+import com.example.ypa_roll_call.auth.data.request.LogoutDto;
+import com.example.ypa_roll_call.auth.data.request.RefreshTokenDto;
 import com.example.ypa_roll_call.auth.data.response.LoginResponse;
 import com.example.ypa_roll_call.auth.service.KeycloakAuthService;
 import com.example.ypa_roll_call.auth.conf.SecurityConfigProperties;
@@ -62,7 +62,7 @@ public class AuthController {
     }
 
     @PostMapping("/refresh")
-    public Mono<ResponseEntity<LoginResponse>> refresh(@RequestBody RefreshTokenRequest request) {
+    public Mono<ResponseEntity<LoginResponse>> refresh(@RequestBody RefreshTokenDto request) {
         return keycloakAuthService.refreshToken(request)
                 .map(ResponseEntity::ok)
                 .onErrorResume(e -> {
@@ -72,7 +72,7 @@ public class AuthController {
     }
 
     @PostMapping("/logout")
-    public Mono<ResponseEntity<Void>> logout(@RequestBody LogoutRequest request) {
+    public Mono<ResponseEntity<Void>> logout(@RequestBody LogoutDto request) {
         return keycloakAuthService.logout(request)
                 .then(Mono.just(ResponseEntity.ok().<Void>build()))
                 .onErrorResume(e -> {
