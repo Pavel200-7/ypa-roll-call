@@ -6,10 +6,11 @@ import {
   type RemoteTrack,
   type RemoteTrackPublication,
   type Participant,
-  type LocalTrackPublication,
-  type TrackPublication,
+  DisconnectReason,
 } from 'livekit-client'
 import type { ParticipantsInfo } from '@/types/room/ParticipantsInfo'
+import { useRouter } from 'vue-router'
+
 
 export interface UseConnectionReturn {
   roomInstance: Ref<Room | null>
@@ -21,6 +22,8 @@ export interface UseConnectionReturn {
 }
 
 export function useConnection(participantsInfo: ParticipantsInfo): UseConnectionReturn {
+  const router = useRouter()
+
   const url: string = import.meta.env.VITE_API_SFU_URL
   const roomInstance = shallowRef<Room | null>(null)   // ← shallowRef
   const localParticipantIdentity = ref<string | null>(null)
@@ -61,9 +64,13 @@ export function useConnection(participantsInfo: ParticipantsInfo): UseConnection
           if (info) info.setIsSpeaking(true)
         }
       })
-      .on(RoomEvent.Disconnected, () => {
+      .on(RoomEvent.Disconnected, (reason) => {
         isConnected.value = false
         participantsInfo.clear()
+        if (reason === DisconnectReason.DUPLICATE_IDENTITY) {
+          // Это точно вытеснение другой вкладкой
+          router.replace('/call/kicked')
+        }
       })
   }
 
@@ -112,6 +119,7 @@ export function useConnection(participantsInfo: ParticipantsInfo): UseConnection
       localParticipantIdentity.value = room.localParticipant?.identity ?? null
       let metadata = room.localParticipant?.metadata ?? null
       
+      participantsInfo.clear()
       if (localParticipantIdentity.value) {
         participantsInfo.addNewParticipant(localParticipantIdentity.value, true, metadata)
       }

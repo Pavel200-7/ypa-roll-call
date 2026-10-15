@@ -2,6 +2,8 @@ import { defineStore } from 'pinia'
 import { ref } from 'vue'
 
 const ROOM_ID_KEY = 'active_room_id'
+const CONNECTED_KEY = 'livekit_connected'
+
 
 export const useConnectionTokenStore = defineStore('connectionToken', () => {
   const token = ref<string | null>(null)

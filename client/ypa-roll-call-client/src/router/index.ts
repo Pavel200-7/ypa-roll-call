@@ -34,6 +34,11 @@ const router = createRouter({
       component: () => import('@/views/call/CreateRoomEntryView.vue'),
     },
     {
+      path: '/call/kicked',
+      name: 'call-kicked',
+      component: () => import('@/views/call/KickedFromCallView.vue'),
+    },
+    {
       path: '/call/join/:roomId?',
       name: 'call-join',
       component: () => import('@/views/call/JoinRoomEntryView.vue'),
