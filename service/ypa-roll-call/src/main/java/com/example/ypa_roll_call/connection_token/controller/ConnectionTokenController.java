@@ -1,6 +1,5 @@
 package com.example.ypa_roll_call.connection_token.controller;
 
-import com.example.ypa_roll_call.common.exception.room.ParticipantBlockedException;
 import com.example.ypa_roll_call.connection_token.data.response.ConnectionTokenDto;
 import com.example.ypa_roll_call.connection_token.service.ConnectionTokenService;
 import com.example.ypa_roll_call.room.data.common.RoomOptions;
@@ -25,8 +24,7 @@ public class ConnectionTokenController {
     }
 
     @GetMapping("/participant/{roomId}")
-    public ResponseEntity<ConnectionTokenDto> getParticipantToken(@PathVariable UUID roomId)
-            throws ParticipantBlockedException {
+    public ResponseEntity<ConnectionTokenDto> getParticipantToken(@PathVariable UUID roomId) {
         ConnectionTokenDto connectionToken = connectionTokenService.getParticipantConnectionToken(roomId);
         return ResponseEntity.ok(connectionToken);
     }

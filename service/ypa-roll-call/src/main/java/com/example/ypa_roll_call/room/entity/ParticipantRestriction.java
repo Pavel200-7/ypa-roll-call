@@ -21,8 +21,9 @@ public class ParticipantRestriction extends BaseEntity {
     @Column(name = "id", nullable = false, updatable = false)
     private UUID id;
 
-    @Column(name = "room_id", nullable = false, updatable = false)
-    private UUID roomId;
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "room_id")
+    private Room room;
 
     @Column(name = "participant_id", nullable = false, updatable = false)
     private UUID participantId;
@@ -36,13 +37,18 @@ public class ParticipantRestriction extends BaseEntity {
     @Enumerated(EnumType.ORDINAL)
     private Set<RestrictionType> restrictions = EnumSet.noneOf(RestrictionType.class);
 
-    public ParticipantRestriction(
-            UUID roomId,
-            UUID participantId
-    ) {
+    private ParticipantRestriction(
+            Room room,
+            UUID participantId) {
         this.id = UUID.randomUUID();
-        this.roomId = roomId;
+        this.room = room;
         this.participantId = participantId;
+    }
+
+    public static ParticipantRestriction createRestriction(
+            Room room,
+            UUID participantId) {
+        return new ParticipantRestriction(room, participantId);
     }
 
     public void addRestriction(RestrictionType type) {

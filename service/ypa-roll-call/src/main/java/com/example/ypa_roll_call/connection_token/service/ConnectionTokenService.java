@@ -9,5 +9,5 @@ import java.util.UUID;
 
 public interface ConnectionTokenService {
     ConnectionTokenDto getAdminConnectionToken(RoomOptions options);
-    ConnectionTokenDto getParticipantConnectionToken(UUID roomId) throws ParticipantBlockedException;
+    ConnectionTokenDto getParticipantConnectionToken(UUID roomId);
 }

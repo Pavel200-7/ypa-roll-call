@@ -1,6 +1,6 @@
 package com.example.ypa_roll_call.common.exception.room;
 
-import java.nio.file.AccessDeniedException;
+import org.springframework.security.access.AccessDeniedException;
 import java.util.UUID;
 
 public class ParticipantBlockedException extends AccessDeniedException {

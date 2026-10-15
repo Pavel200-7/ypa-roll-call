@@ -35,4 +35,9 @@ public class Room extends BaseEntity {
     public String getStringId() {
         return this.id.toString();
     }
+
+    public boolean isAdmin(UUID participantId) {
+        return this.id
+                .equals(participantId);
+    }
 }

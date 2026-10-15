@@ -50,7 +50,7 @@ public class ConnectionTokenServiceImpl implements ConnectionTokenService {
 
     @Override
     @LogOperation("ISSUE_CONNECTION_TOKEN")
-    public ConnectionTokenDto getParticipantConnectionToken(UUID roomId) throws ParticipantBlockedException {
+    public ConnectionTokenDto getParticipantConnectionToken(UUID roomId) {
         if (!roomService.roomExists(roomId)) {
             throw new RoomNotFoundException(roomId);
         }
