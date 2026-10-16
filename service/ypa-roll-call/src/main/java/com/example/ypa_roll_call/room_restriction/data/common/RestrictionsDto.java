@@ -1,6 +1,6 @@
-package com.example.ypa_roll_call.room.data.response;
+package com.example.ypa_roll_call.room_restriction.data.common;
 
-import com.example.ypa_roll_call.room.enums.RestrictionType;
+import com.example.ypa_roll_call.room_restriction.enums.RestrictionType;
 import lombok.Data;
 
 import java.util.List;

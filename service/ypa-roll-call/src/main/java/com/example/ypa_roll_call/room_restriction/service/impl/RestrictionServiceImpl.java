@@ -1,17 +1,17 @@
-package com.example.ypa_roll_call.room.service.impl;
+package com.example.ypa_roll_call.room_restriction.service.impl;
 
 import com.example.ypa_roll_call.auth.utils.CurrentUser;
 import com.example.ypa_roll_call.common.exception.room.RoomNotFoundException;
 import com.example.ypa_roll_call.common.logging.annotation.LogOperation;
-import com.example.ypa_roll_call.room.data.common.RestrictionDto;
-import com.example.ypa_roll_call.room.data.request.GetRestrictionsDto;
-import com.example.ypa_roll_call.room.data.response.RestrictionsDto;
-import com.example.ypa_roll_call.room.entity.ParticipantRestriction;
+import com.example.ypa_roll_call.room_restriction.data.common.RestrictionDto;
+import com.example.ypa_roll_call.room_restriction.data.request.GetRestrictionsDto;
+import com.example.ypa_roll_call.room_restriction.data.common.RestrictionsDto;
+import com.example.ypa_roll_call.room_restriction.domain.ParticipantRestriction;
 import com.example.ypa_roll_call.room.entity.Room;
-import com.example.ypa_roll_call.room.enums.RestrictionType;
-import com.example.ypa_roll_call.room.repository.ParticipantRestrictionRepository;
+import com.example.ypa_roll_call.room_restriction.enums.RestrictionType;
+import com.example.ypa_roll_call.room_restriction.repository.ParticipantRestrictionRepository;
 import com.example.ypa_roll_call.room.repository.RoomRepository;
-import com.example.ypa_roll_call.room.service.RestrictionService;
+import com.example.ypa_roll_call.room_restriction.service.RestrictionService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.stereotype.Service;

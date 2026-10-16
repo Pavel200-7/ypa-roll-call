@@ -1,7 +1,8 @@
-package com.example.ypa_roll_call.room.entity;
+package com.example.ypa_roll_call.room_restriction.domain;
 
 import com.example.ypa_roll_call.common.entity.base.BaseEntity;
-import com.example.ypa_roll_call.room.enums.RestrictionType;
+import com.example.ypa_roll_call.room.entity.Room;
+import com.example.ypa_roll_call.room_restriction.enums.RestrictionType;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Getter;

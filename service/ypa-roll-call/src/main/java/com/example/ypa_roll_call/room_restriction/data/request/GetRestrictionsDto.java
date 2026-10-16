@@ -1,4 +1,4 @@
-package com.example.ypa_roll_call.room.data.request;
+package com.example.ypa_roll_call.room_restriction.data.request;
 
 import lombok.Data;
 

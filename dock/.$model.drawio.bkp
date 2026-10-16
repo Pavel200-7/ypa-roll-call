@@ -1,0 +1,195 @@
+<mxfile host="Electron">
+  <diagram name="Страница-1" id="fCRY2paacYLjMX8QEazR">
+    <mxGraphModel dx="2241" dy="2052" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="9RKLMCnLWQdyFecq_RHi-109" edge="1" parent="1" source="9RKLMCnLWQdyFecq_RHi-13" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" target="9RKLMCnLWQdyFecq_RHi-61">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="9RKLMCnLWQdyFecq_RHi-110" edge="1" parent="1" source="9RKLMCnLWQdyFecq_RHi-13" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" target="9RKLMCnLWQdyFecq_RHi-42">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="200" y="350" />
+              <mxPoint x="200" y="350" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="9RKLMCnLWQdyFecq_RHi-13" parent="1" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" value="RoomMaster" vertex="1">
+          <mxGeometry height="112" width="240" x="80" y="160" as="geometry" />
+        </mxCell>
+        <mxCell id="9RKLMCnLWQdyFecq_RHi-15" parent="9RKLMCnLWQdyFecq_RHi-13" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;strokeColor=inherit;" value="" vertex="1">
+          <mxGeometry height="8" width="240" y="26" as="geometry" />
+        </mxCell>
+        <mxCell id="9RKLMCnLWQdyFecq_RHi-16" parent="9RKLMCnLWQdyFecq_RHi-13" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" value="+ createRoom(&lt;span style=&quot;text-align: center;&quot;&gt;CreateRoomDto dto&lt;/span&gt;): void" vertex="1">
+          <mxGeometry height="26" width="240" y="34" as="geometry" />
+        </mxCell>
+        <mxCell id="9RKLMCnLWQdyFecq_RHi-64" parent="9RKLMCnLWQdyFecq_RHi-13" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" value="+ deleteRoom(UUID roomId): void" vertex="1">
+          <mxGeometry height="26" width="240" y="60" as="geometry" />
+        </mxCell>
+        <mxCell id="9RKLMCnLWQdyFecq_RHi-76" parent="9RKLMCnLWQdyFecq_RHi-13" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" value="+ kickAll(UUID roomId): void" vertex="1">
+          <mxGeometry height="26" width="240" y="86" as="geometry" />
+        </mxCell>
+        <mxCell id="9RKLMCnLWQdyFecq_RHi-17" parent="1" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" value="RoomRecord" vertex="1">
+          <mxGeometry height="164" width="160" x="1040" y="520" as="geometry" />
+        </mxCell>
+        <mxCell id="9RKLMCnLWQdyFecq_RHi-18" parent="9RKLMCnLWQdyFecq_RHi-17" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" value="+ id: UUID" vertex="1">
+          <mxGeometry height="26" width="160" y="26" as="geometry" />
+        </mxCell>
+        <mxCell id="9RKLMCnLWQdyFecq_RHi-21" parent="9RKLMCnLWQdyFecq_RHi-17" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" value="+ organiserId: UUID" vertex="1">
+          <mxGeometry height="26" width="160" y="52" as="geometry" />
+        </mxCell>
+        <mxCell id="9RKLMCnLWQdyFecq_RHi-19" parent="9RKLMCnLWQdyFecq_RHi-17" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;strokeColor=inherit;" value="" vertex="1">
+          <mxGeometry height="8" width="160" y="78" as="geometry" />
+        </mxCell>
+        <mxCell id="9RKLMCnLWQdyFecq_RHi-20" parent="9RKLMCnLWQdyFecq_RHi-17" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" value="+ getRoomId(): UUID" vertex="1">
+          <mxGeometry height="26" width="160" y="86" as="geometry" />
+        </mxCell>
+        <mxCell id="9RKLMCnLWQdyFecq_RHi-27" parent="9RKLMCnLWQdyFecq_RHi-17" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" value="+ getOrganizerId(): UUID" vertex="1">
+          <mxGeometry height="26" width="160" y="112" as="geometry" />
+        </mxCell>
+        <mxCell id="9RKLMCnLWQdyFecq_RHi-28" parent="9RKLMCnLWQdyFecq_RHi-17" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" value="+ isOrganizer(): bolean" vertex="1">
+          <mxGeometry height="26" width="160" y="138" as="geometry" />
+        </mxCell>
+        <mxCell id="9RKLMCnLWQdyFecq_RHi-29" parent="1" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" value="RoomRecordFactory" vertex="1">
+          <mxGeometry height="60" width="320" x="1081" y="200" as="geometry" />
+        </mxCell>
+        <mxCell id="9RKLMCnLWQdyFecq_RHi-31" parent="9RKLMCnLWQdyFecq_RHi-29" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;strokeColor=inherit;" value="" vertex="1">
+          <mxGeometry height="8" width="320" y="26" as="geometry" />
+        </mxCell>
+        <mxCell id="9RKLMCnLWQdyFecq_RHi-32" parent="9RKLMCnLWQdyFecq_RHi-29" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" value="+ createRoom(RoomOptions options): RoomRecord" vertex="1">
+          <mxGeometry height="26" width="320" y="34" as="geometry" />
+        </mxCell>
+        <mxCell id="9RKLMCnLWQdyFecq_RHi-33" parent="1" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" value="RoomOptions" vertex="1">
+          <mxGeometry height="34" width="200" x="430" y="-18" as="geometry" />
+        </mxCell>
+        <mxCell id="9RKLMCnLWQdyFecq_RHi-34" parent="9RKLMCnLWQdyFecq_RHi-33" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;strokeColor=inherit;" value="" vertex="1">
+          <mxGeometry height="8" width="200" y="26" as="geometry" />
+        </mxCell>
+        <mxCell id="9RKLMCnLWQdyFecq_RHi-42" parent="1" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" value="Room" vertex="1">
+          <mxGeometry height="386" width="520" x="-60" y="400" as="geometry" />
+        </mxCell>
+        <mxCell id="9RKLMCnLWQdyFecq_RHi-44" parent="9RKLMCnLWQdyFecq_RHi-42" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;strokeColor=inherit;" value="" vertex="1">
+          <mxGeometry height="8" width="520" y="26" as="geometry" />
+        </mxCell>
+        <mxCell id="9RKLMCnLWQdyFecq_RHi-45" parent="9RKLMCnLWQdyFecq_RHi-42" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" value="+ createRoom(String roomName): LivekitModels.Room" vertex="1">
+          <mxGeometry height="26" width="520" y="34" as="geometry" />
+        </mxCell>
+        <mxCell id="9RKLMCnLWQdyFecq_RHi-47" parent="9RKLMCnLWQdyFecq_RHi-42" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" value="+ listRooms(List&amp;lt;String&amp;gt; roomNames): List&amp;lt;LivekitModels.Room&amp;gt;" vertex="1">
+          <mxGeometry height="26" width="520" y="60" as="geometry" />
+        </mxCell>
+        <mxCell id="9RKLMCnLWQdyFecq_RHi-46" parent="9RKLMCnLWQdyFecq_RHi-42" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" value="+ deleteRoom(String roomName): void" vertex="1">
+          <mxGeometry height="26" width="520" y="86" as="geometry" />
+        </mxCell>
+        <mxCell id="9RKLMCnLWQdyFecq_RHi-49" parent="9RKLMCnLWQdyFecq_RHi-42" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" value="+ updateRoomMetadata(String roomName, String metadata): LivekitModels.Room" vertex="1">
+          <mxGeometry height="26" width="520" y="112" as="geometry" />
+        </mxCell>
+        <mxCell id="9RKLMCnLWQdyFecq_RHi-48" parent="9RKLMCnLWQdyFecq_RHi-42" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" value="+ listParticipnts(String roomName): List&amp;lt;LivekitModels.ParticipnatInfo&amp;gt;" vertex="1">
+          <mxGeometry height="26" width="520" y="138" as="geometry" />
+        </mxCell>
+        <mxCell id="9RKLMCnLWQdyFecq_RHi-50" parent="9RKLMCnLWQdyFecq_RHi-42" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" value="+ getParticipant(String roomName, String participantId): LivekitModels.ParticipnatInfo" vertex="1">
+          <mxGeometry height="26" width="520" y="164" as="geometry" />
+        </mxCell>
+        <mxCell id="9RKLMCnLWQdyFecq_RHi-51" parent="9RKLMCnLWQdyFecq_RHi-42" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" value="+ removeParticipant(String roomName, String participantId): void" vertex="1">
+          <mxGeometry height="26" width="520" y="190" as="geometry" />
+        </mxCell>
+        <mxCell id="9RKLMCnLWQdyFecq_RHi-52" parent="9RKLMCnLWQdyFecq_RHi-42" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" value="+ forwardParticipant(String roomName, String participantId, String destinationRoomName): LivekitModels.FrowardParticipantResponse" vertex="1">
+          <mxGeometry height="34" width="520" y="216" as="geometry" />
+        </mxCell>
+        <mxCell id="9RKLMCnLWQdyFecq_RHi-53" parent="9RKLMCnLWQdyFecq_RHi-42" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" value="+ moveParticipant(String roomName, String participantId, String destinationRoomName): LivekitModels.MoveParticipantResponse" vertex="1">
+          <mxGeometry height="34" width="520" y="250" as="geometry" />
+        </mxCell>
+        <mxCell id="9RKLMCnLWQdyFecq_RHi-54" parent="9RKLMCnLWQdyFecq_RHi-42" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" value="+ mutePublishedTrack(String roomName, String participantId, String trackId, bolean mute): LivekitModels.TrackInfo" vertex="1">
+          <mxGeometry height="34" width="520" y="284" as="geometry" />
+        </mxCell>
+        <mxCell id="9RKLMCnLWQdyFecq_RHi-55" parent="9RKLMCnLWQdyFecq_RHi-42" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" value="+ updateParticipnt(String roomName, String participantId, String name, String metadata, Permitions permitions): LivekitModels.ParticipnatInfo" vertex="1">
+          <mxGeometry height="34" width="520" y="318" as="geometry" />
+        </mxCell>
+        <mxCell id="9RKLMCnLWQdyFecq_RHi-56" parent="9RKLMCnLWQdyFecq_RHi-42" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" value="+ updateSubscriptions(String roomName, String participantId, String trackId, bolean subscribe): LivekitModels.ParticipnatInfo" vertex="1">
+          <mxGeometry height="34" width="520" y="352" as="geometry" />
+        </mxCell>
+        <mxCell id="9RKLMCnLWQdyFecq_RHi-108" edge="1" parent="1" source="9RKLMCnLWQdyFecq_RHi-61" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" target="9RKLMCnLWQdyFecq_RHi-33">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="9RKLMCnLWQdyFecq_RHi-61" parent="1" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=26;fillColor=none;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" value="CreateRoomDto" vertex="1">
+          <mxGeometry height="78" width="140" x="130" y="-40" as="geometry" />
+        </mxCell>
+        <mxCell id="9RKLMCnLWQdyFecq_RHi-62" parent="9RKLMCnLWQdyFecq_RHi-61" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" value="+ organizerId: UUID" vertex="1">
+          <mxGeometry height="26" width="140" y="26" as="geometry" />
+        </mxCell>
+        <mxCell id="9RKLMCnLWQdyFecq_RHi-63" parent="9RKLMCnLWQdyFecq_RHi-61" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" value="+ options: RoomOptions" vertex="1">
+          <mxGeometry height="26" width="140" y="52" as="geometry" />
+        </mxCell>
+        <mxCell id="9RKLMCnLWQdyFecq_RHi-100" edge="1" parent="1" source="9RKLMCnLWQdyFecq_RHi-65" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" target="9RKLMCnLWQdyFecq_RHi-93">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="9RKLMCnLWQdyFecq_RHi-102" edge="1" parent="1" source="9RKLMCnLWQdyFecq_RHi-65" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" target="9RKLMCnLWQdyFecq_RHi-29">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="9RKLMCnLWQdyFecq_RHi-103" edge="1" parent="1" source="9RKLMCnLWQdyFecq_RHi-65" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" target="9RKLMCnLWQdyFecq_RHi-17">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1020" y="270" />
+              <mxPoint x="1020" y="480" />
+              <mxPoint x="1120" y="480" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="9RKLMCnLWQdyFecq_RHi-105" edge="1" parent="1" source="9RKLMCnLWQdyFecq_RHi-65" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" target="9RKLMCnLWQdyFecq_RHi-72">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="9RKLMCnLWQdyFecq_RHi-65" parent="1" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" value="RoomRegistrar" vertex="1">
+          <mxGeometry height="138" width="360" x="600" y="200" as="geometry" />
+        </mxCell>
+        <mxCell id="9RKLMCnLWQdyFecq_RHi-67" parent="9RKLMCnLWQdyFecq_RHi-65" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;strokeColor=inherit;" value="" vertex="1">
+          <mxGeometry height="8" width="360" y="26" as="geometry" />
+        </mxCell>
+        <mxCell id="9RKLMCnLWQdyFecq_RHi-79" parent="9RKLMCnLWQdyFecq_RHi-65" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" value="+ existRoom(&lt;span style=&quot;text-align: center;&quot;&gt;UUID roomId&lt;/span&gt;): bolean" vertex="1">
+          <mxGeometry height="26" width="360" y="34" as="geometry" />
+        </mxCell>
+        <mxCell id="9RKLMCnLWQdyFecq_RHi-68" parent="9RKLMCnLWQdyFecq_RHi-65" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" value="+ createRoomRecord(&lt;span style=&quot;text-align: center;&quot;&gt;CreateRoomRecordDto&lt;/span&gt;): void" vertex="1">
+          <mxGeometry height="26" width="360" y="60" as="geometry" />
+        </mxCell>
+        <mxCell id="9RKLMCnLWQdyFecq_RHi-75" parent="9RKLMCnLWQdyFecq_RHi-65" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" value="+ deleteRoomRecord(&lt;span style=&quot;text-align: center;&quot;&gt;CreateRoomRecordDto&lt;/span&gt;): void" vertex="1">
+          <mxGeometry height="26" width="360" y="86" as="geometry" />
+        </mxCell>
+        <mxCell id="9RKLMCnLWQdyFecq_RHi-87" parent="9RKLMCnLWQdyFecq_RHi-65" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" value="+ getRoomRecord(&lt;span style=&quot;text-align: center;&quot;&gt;UUID roomId&lt;/span&gt;): Optional&amp;lt;RoomRecord&amp;gt;" vertex="1">
+          <mxGeometry height="26" width="360" y="112" as="geometry" />
+        </mxCell>
+        <mxCell id="9RKLMCnLWQdyFecq_RHi-106" edge="1" parent="1" source="9RKLMCnLWQdyFecq_RHi-72" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" target="9RKLMCnLWQdyFecq_RHi-33">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="9RKLMCnLWQdyFecq_RHi-72" parent="1" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=26;fillColor=none;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" value="CreateRoomRecordDto" vertex="1">
+          <mxGeometry height="78" width="140" x="710" y="-40" as="geometry" />
+        </mxCell>
+        <mxCell id="9RKLMCnLWQdyFecq_RHi-73" parent="9RKLMCnLWQdyFecq_RHi-72" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" value="+ organizerId: UUID" vertex="1">
+          <mxGeometry height="26" width="140" y="26" as="geometry" />
+        </mxCell>
+        <mxCell id="9RKLMCnLWQdyFecq_RHi-74" parent="9RKLMCnLWQdyFecq_RHi-72" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" value="+ options: RoomOptions" vertex="1">
+          <mxGeometry height="26" width="140" y="52" as="geometry" />
+        </mxCell>
+        <mxCell id="9RKLMCnLWQdyFecq_RHi-101" edge="1" parent="1" source="9RKLMCnLWQdyFecq_RHi-93" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" target="9RKLMCnLWQdyFecq_RHi-20">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="9RKLMCnLWQdyFecq_RHi-93" parent="1" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" value="RoomRecordRepositiry" vertex="1">
+          <mxGeometry height="138" width="280" x="640" y="550" as="geometry" />
+        </mxCell>
+        <mxCell id="9RKLMCnLWQdyFecq_RHi-95" parent="9RKLMCnLWQdyFecq_RHi-93" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;strokeColor=inherit;" value="" vertex="1">
+          <mxGeometry height="8" width="280" y="26" as="geometry" />
+        </mxCell>
+        <mxCell id="9RKLMCnLWQdyFecq_RHi-96" parent="9RKLMCnLWQdyFecq_RHi-93" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" value="+ save(RoomRecord roomRecord): RoomRecord" vertex="1">
+          <mxGeometry height="26" width="280" y="34" as="geometry" />
+        </mxCell>
+        <mxCell id="9RKLMCnLWQdyFecq_RHi-97" parent="9RKLMCnLWQdyFecq_RHi-93" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" value="+ deleteById(UUID id): void" vertex="1">
+          <mxGeometry height="26" width="280" y="60" as="geometry" />
+        </mxCell>
+        <mxCell id="9RKLMCnLWQdyFecq_RHi-98" parent="9RKLMCnLWQdyFecq_RHi-93" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" value="+ findById(UUID id): Optional&amp;lt;RoomRecord&amp;gt;" vertex="1">
+          <mxGeometry height="26" width="280" y="86" as="geometry" />
+        </mxCell>
+        <mxCell id="9RKLMCnLWQdyFecq_RHi-99" parent="9RKLMCnLWQdyFecq_RHi-93" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" value="+ existsById(UUID id): bolean" vertex="1">
+          <mxGeometry height="26" width="280" y="112" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

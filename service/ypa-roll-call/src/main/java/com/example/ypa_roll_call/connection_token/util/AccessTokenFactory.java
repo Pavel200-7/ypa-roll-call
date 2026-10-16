@@ -3,7 +3,7 @@ package com.example.ypa_roll_call.connection_token.util;
 import com.example.ypa_roll_call.common.conf.LiveKitProperties;
 import com.example.ypa_roll_call.common.enums.ParticipantRole;
 import com.example.ypa_roll_call.common.util.ParticipantMetadataEncoder;
-import com.example.ypa_roll_call.room.enums.RestrictionType;
+import com.example.ypa_roll_call.room_restriction.enums.RestrictionType;
 import io.livekit.server.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;

@@ -7,20 +7,18 @@ import com.example.ypa_roll_call.common.logging.annotation.LogOperation;
 import com.example.ypa_roll_call.connection_token.data.response.ConnectionTokenDto;
 import com.example.ypa_roll_call.connection_token.service.ConnectionTokenService;
 import com.example.ypa_roll_call.connection_token.util.AccessTokenFactory;
-import com.example.ypa_roll_call.room.data.common.RestrictionDto;
 import com.example.ypa_roll_call.room.data.common.RoomOptions;
 import com.example.ypa_roll_call.room.data.request.CreateRoomDto;
-import com.example.ypa_roll_call.room.data.request.GetRestrictionsDto;
-import com.example.ypa_roll_call.room.data.response.RestrictionsDto;
+import com.example.ypa_roll_call.room_restriction.data.request.GetRestrictionsDto;
+import com.example.ypa_roll_call.room_restriction.data.common.RestrictionsDto;
 import com.example.ypa_roll_call.room.data.response.RoomDto;
-import com.example.ypa_roll_call.room.enums.RestrictionType;
-import com.example.ypa_roll_call.room.service.RestrictionService;
+import com.example.ypa_roll_call.room_restriction.enums.RestrictionType;
+import com.example.ypa_roll_call.room_restriction.service.RestrictionService;
 import com.example.ypa_roll_call.room.service.RoomService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
-import java.nio.file.AccessDeniedException;
 import java.util.List;
 import java.util.UUID;
 

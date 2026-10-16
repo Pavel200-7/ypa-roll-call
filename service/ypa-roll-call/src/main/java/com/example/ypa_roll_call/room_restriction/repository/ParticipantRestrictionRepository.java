@@ -1,6 +1,6 @@
-package com.example.ypa_roll_call.room.repository;
+package com.example.ypa_roll_call.room_restriction.repository;
 
-import com.example.ypa_roll_call.room.entity.ParticipantRestriction;
+import com.example.ypa_roll_call.room_restriction.domain.ParticipantRestriction;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;
