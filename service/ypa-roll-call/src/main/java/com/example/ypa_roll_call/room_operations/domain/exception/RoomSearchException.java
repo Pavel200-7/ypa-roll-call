@@ -1,10 +1,11 @@
-package com.example.ypa_roll_call.common.exception.room;
+package com.example.ypa_roll_call.room_operations.domain.exception;
 
 import com.example.ypa_roll_call.common.exception.base.ApplicationException;
 
 import java.util.UUID;
 
 public class RoomSearchException extends ApplicationException {
+
     public RoomSearchException() {
         super(getDefaultMessage());
     }
