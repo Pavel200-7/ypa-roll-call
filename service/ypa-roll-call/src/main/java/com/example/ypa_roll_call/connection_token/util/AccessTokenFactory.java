@@ -2,7 +2,7 @@
 //
 //import com.example.ypa_roll_call.common.conf.LiveKitProperties;
 //import com.example.ypa_roll_call.common.enums.ParticipantRole;
-//import util.token.livekit.infrastructure.com.example.ypa_roll_call.room.ParticipantMetadataEncoder;
+//import util.value.livekit.infrastructure.com.example.ypa_roll_call.room.ParticipantMetadataEncoder;
 //import com.example.ypa_roll_call.room_restriction.enums.RestrictionType;
 //import io.livekit.server.*;
 //import lombok.RequiredArgsConstructor;
@@ -24,10 +24,10 @@
 //    private final ParticipantMetadataEncoder metaDataEncoder;
 //
 //    public String createAdminToken(UUID roomId, String identity) {
-//        AccessToken token = createBaseToken(roomId, identity, ALL_PUBLISH_SOURCES, true);
-//        token.addGrants(new RoomAdmin(true));
-//        token.setMetadata(metaDataEncoder.encode(ParticipantRole.ADMIN));
-//        return token.toJwt();
+//        AccessToken value = createBaseToken(roomId, identity, ALL_PUBLISH_SOURCES, true);
+//        value.addGrants(new RoomAdmin(true));
+//        value.setMetadata(metaDataEncoder.encode(ParticipantRole.ADMIN));
+//        return value.toJwt();
 //    }
 //
 //    public String createParticipantToken(
@@ -41,10 +41,10 @@
 //        // canPublish вообще не выдаём
 //        boolean canPublish = !sources.isEmpty();
 //
-//        AccessToken token = createBaseToken(roomId, identity, sources, canPublish);
-//        token.addGrants(new CanUpdateOwnMetadata(false));
-//        token.setMetadata(metaDataEncoder.encode(ParticipantRole.PARTICIPANT));
-//        return token.toJwt();
+//        AccessToken value = createBaseToken(roomId, identity, sources, canPublish);
+//        value.addGrants(new CanUpdateOwnMetadata(false));
+//        value.setMetadata(metaDataEncoder.encode(ParticipantRole.PARTICIPANT));
+//        return value.toJwt();
 //    }
 //
 //    /**
@@ -74,12 +74,12 @@
 //            List<String> publishSources,
 //            boolean canPublish
 //    ) {
-//        AccessToken token = new AccessToken(
+//        AccessToken value = new AccessToken(
 //                properties.getApiKey(),
 //                properties.getApiSecret()
 //        );
-//        token.setIdentity(identity);
-//        token.addGrants(
+//        value.setIdentity(identity);
+//        value.addGrants(
 //                new RoomName(roomId.toString()),
 //                new RoomJoin(true),
 //                new CanSubscribe(true),
@@ -87,12 +87,12 @@
 //        );
 //
 //        if (canPublish) {
-//            token.addGrants(new CanPublish(true));
+//            value.addGrants(new CanPublish(true));
 //            if (!publishSources.isEmpty()) {
-//                token.addGrants(new CanPublishSources(publishSources));
+//                value.addGrants(new CanPublishSources(publishSources));
 //            }
 //        }
 //
-//        return token;
+//        return value;
 //    }
 //}

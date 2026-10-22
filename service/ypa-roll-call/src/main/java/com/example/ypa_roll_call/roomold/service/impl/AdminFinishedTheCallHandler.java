@@ -2,7 +2,7 @@
 //
 //import com.example.ypa_roll_call.common.enums.ParticipantRole;
 //import com.example.ypa_roll_call.common.annotation.annotation.logging.LogOperation;
-//import util.token.livekit.infrastructure.com.example.ypa_roll_call.room.ParticipantMetadataEncoder;
+//import util.value.livekit.infrastructure.com.example.ypa_roll_call.room.ParticipantMetadataEncoder;
 //import com.example.ypa_roll_call.roomold.service.RoomService;
 //import com.example.ypa_roll_call.roomold.service.WebhookEventHandler;
 //import livekit.LivekitWebhook.WebhookEvent;

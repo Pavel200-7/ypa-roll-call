@@ -20,7 +20,7 @@ public class SecurityConfigProperties {
     }
 
     public String getTokenUri() {
-        return outUri + "/protocol/openid-connect/token";
+        return outUri + "/protocol/openid-connect/value";
     }
 
     public String getLogoutUri() {
@@ -32,7 +32,7 @@ public class SecurityConfigProperties {
     }
 
     public String getDockerTokenUri() {
-        return dockerUri + "/protocol/openid-connect/token";
+        return dockerUri + "/protocol/openid-connect/value";
     }
 
     public String getDockerLogoutUri() {

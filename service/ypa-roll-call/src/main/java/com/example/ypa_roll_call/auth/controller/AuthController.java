@@ -66,7 +66,7 @@ public class AuthController {
         return keycloakAuthService.refreshToken(request)
                 .map(ResponseEntity::ok)
                 .onErrorResume(e -> {
-                    log.error("Failed to refresh token: {}", e.getMessage());
+                    log.error("Failed to refresh value: {}", e.getMessage());
                     return Mono.just(ResponseEntity.status(HttpStatus.UNAUTHORIZED).build());
                 });
     }

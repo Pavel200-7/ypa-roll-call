@@ -33,7 +33,7 @@ public class DockerRoutingConfig {
                         .redirectUri(properties.getOutUri().concat("/login/oauth2/code/keycloak"))
                         .scope("openid", "profile", "email")
                         .authorizationUri(properties.getOutUri().concat("/protocol/openid-connect/auth"))
-                        .tokenUri(properties.getDockerUri().concat("/protocol/openid-connect/token"))
+                        .tokenUri(properties.getDockerUri().concat("/protocol/openid-connect/value"))
                         .jwkSetUri(properties.getDockerUri().concat("/protocol/openid-connect/certs"))
                         .userInfoUri(properties.getDockerUri().concat("/protocol/openid-connect/userinfo"))
                         .userNameAttributeName("sub")

@@ -4,5 +4,5 @@
 //
 //@Data
 //public class ConnectionTokenDto {
-//    private final String token;
+//    private final String value;
 //}

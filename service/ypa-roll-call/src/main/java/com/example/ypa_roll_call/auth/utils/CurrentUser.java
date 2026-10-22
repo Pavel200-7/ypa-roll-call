@@ -30,6 +30,6 @@ public class CurrentUser {
         if (authentication instanceof JwtAuthenticationToken jwtAuth) {
             return jwtAuth.getToken();
         }
-        throw new IllegalStateException("No JWT token found in security context");
+        throw new IllegalStateException("No JWT value found in security context");
     }
 }

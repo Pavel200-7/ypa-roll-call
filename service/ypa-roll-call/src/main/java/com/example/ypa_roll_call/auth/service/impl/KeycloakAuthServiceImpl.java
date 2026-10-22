@@ -63,7 +63,7 @@ public class KeycloakAuthServiceImpl implements KeycloakAuthService {
                     log.error("Keycloak error response status: {}", response.statusCode());
                     return response.bodyToMono(String.class)
                             .doOnNext(errorBody -> log.error("Keycloak error body: {}", errorBody))
-                            .then(Mono.error(new RuntimeException("Keycloak token exchange failed: " + response.statusCode())));
+                            .then(Mono.error(new RuntimeException("Keycloak value exchange failed: " + response.statusCode())));
                 })
                 .bodyToMono(new ParameterizedTypeReference<Map<String, Object>>() {})
                 .map(response -> {
@@ -82,11 +82,11 @@ public class KeycloakAuthServiceImpl implements KeycloakAuthService {
         String refreshToken = request.getRefreshToken();
 
         if (refreshToken == null || refreshToken.trim().isEmpty()) {
-            log.error("Refresh token is empty");
-            return Mono.error(new IllegalArgumentException("Refresh token is empty"));
+            log.error("Refresh value is empty");
+            return Mono.error(new IllegalArgumentException("Refresh value is empty"));
         }
 
-        log.info("Refreshing token");
+        log.info("Refreshing value");
 
         MultiValueMap<String, String> body = new LinkedMultiValueMap<>();
         body.add("client_id", keycloakConfig.getClientId());
@@ -103,7 +103,7 @@ public class KeycloakAuthServiceImpl implements KeycloakAuthService {
                     log.error("Keycloak error response status: {}", response.statusCode());
                     return response.bodyToMono(String.class)
                             .doOnNext(errorBody -> log.error("Keycloak error body: {}", errorBody))
-                            .then(Mono.error(new RuntimeException("Keycloak token refresh failed: " + response.statusCode())));
+                            .then(Mono.error(new RuntimeException("Keycloak value refresh failed: " + response.statusCode())));
                 })
                 .bodyToMono(new ParameterizedTypeReference<Map<String, Object>>() {})
                 .map(response -> {
