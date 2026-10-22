@@ -1,10 +1,10 @@
 package com.example.ypa_roll_call.room.domain.exception;
 
+import com.example.ypa_roll_call.common.exception.base.ApplicationException;
 import com.example.ypa_roll_call.room.domain.model.vo.OrganizerId;
-import com.example.ypa_roll_call.room.domain.model.vo.ParticipantId;
 import com.example.ypa_roll_call.room.domain.model.vo.RoomId;
 
-public class InvalidRoomOrganizerException extends RuntimeException {
+public class InvalidRoomOrganizerException extends ApplicationException {
 
     public InvalidRoomOrganizerException(RoomId roomId, OrganizerId organizerId) {
         super(getDefaultMessage(roomId, organizerId));

@@ -24,16 +24,11 @@ public class CloseRoomUseCase {
     private final RoomMaster roomMaster;
     private final RoomRegistrar roomRegistrar;
 
-    @Transactional
     @LogOperation("CloseRoomUseCase")
     public void execute(CloseRoomCommand command) {
-        UUID currentUserId = currentUser.getUserId().id();
-        OrganizerId organizerId = new OrganizerId(currentUserId);
-
         RoomRecord roomRecord = roomRegistrar.getRoomRecord(command.roomId());
-        if (!roomRecord.isOrganizer(organizerId)) {
-            throw new InvalidRoomOrganizerException(command.roomId(), organizerId);
-        }
+        roomRecord.ensureOrganizer(
+                OrganizerId.of(currentUser.getUserIdAsUUID()));
 
         try {
             roomMaster.deleteRoom(command.roomId());

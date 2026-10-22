@@ -26,12 +26,9 @@ public class CreateRoomUseCase {
     private final RoomRegistrar roomRegistrar;
     private final TokenService tokenService;
 
-    @Transactional
     @LogOperation("CreateRoomUseCase")
     public Token execute(CreateRoomCommand command) {
-        UUID currentUserId = currentUser.getUserId().id();
-        OrganizerId organizerId = new OrganizerId(currentUserId);
-
+        OrganizerId organizerId = OrganizerId.of(currentUser.getUserIdAsUUID());
         RoomId newRoomId = roomMaster.createRoom(organizerId);
 
         try {
@@ -42,7 +39,7 @@ public class CreateRoomUseCase {
             throw e;
         }
 
-        ParticipantId participantId = new ParticipantId(currentUserId);
+        ParticipantId participantId = ParticipantId.of(currentUser.getUserIdAsUUID());
         return tokenService.getAdminToken(newRoomId, participantId);
     }
 }

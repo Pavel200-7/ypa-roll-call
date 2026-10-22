@@ -1,9 +1,10 @@
 package com.example.ypa_roll_call.room.domain.exception;
 
+import com.example.ypa_roll_call.common.exception.base.ApplicationException;
 import com.example.ypa_roll_call.room.domain.model.vo.ParticipantId;
 import com.example.ypa_roll_call.room.domain.model.vo.RoomId;
 
-public class ParticipantBannedException extends RuntimeException {
+public class ParticipantBannedException extends ApplicationException {
 
     public ParticipantBannedException(RoomId roomId, ParticipantId participantId) {
         super(getDefaultMessage(roomId, participantId));

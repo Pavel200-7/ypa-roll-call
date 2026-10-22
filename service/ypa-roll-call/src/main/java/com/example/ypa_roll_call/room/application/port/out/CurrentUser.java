@@ -6,4 +6,5 @@ import java.util.UUID;
 
 public interface CurrentUser {
     UserId getUserId();
+    UUID getUserIdAsUUID();
 }

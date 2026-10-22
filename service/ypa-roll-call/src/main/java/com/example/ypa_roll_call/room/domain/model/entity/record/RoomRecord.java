@@ -1,5 +1,6 @@
 package com.example.ypa_roll_call.room.domain.model.entity.record;
 
+import com.example.ypa_roll_call.room.domain.exception.InvalidRoomOrganizerException;
 import com.example.ypa_roll_call.room.domain.model.vo.OrganizerId;
 
 import com.example.ypa_roll_call.room.domain.model.vo.ParticipantId;
@@ -76,6 +77,12 @@ public class RoomRecord {
     public boolean isOrganizer(OrganizerId organizerId) {
         return this.organizerId
                 .equals(organizerId);
+    }
+
+    public void ensureOrganizer(OrganizerId candidate) {
+        if (!this.organizerId.equals(candidate)) {
+            throw new InvalidRoomOrganizerException(this.id, candidate);
+        }
     }
 
     @Override

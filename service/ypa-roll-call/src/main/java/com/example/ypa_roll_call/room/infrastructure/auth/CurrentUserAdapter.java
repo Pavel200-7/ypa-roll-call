@@ -20,4 +20,9 @@ public class CurrentUserAdapter implements CurrentUser {
     public UserId getUserId() {
         return UserId.of(currentUser.getUserId());
     }
+
+    @Override
+    public UUID getUserIdAsUUID() {
+        return currentUser.getUserId();
+    }
 }

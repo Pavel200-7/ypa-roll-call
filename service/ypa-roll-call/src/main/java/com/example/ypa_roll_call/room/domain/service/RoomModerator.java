@@ -14,21 +14,21 @@ import org.springframework.stereotype.Service;
 public class RoomModerator {
     private final RoomService roomService;
 
-    void kick(RoomId roomId, ParticipantId participantId) {
+    public void kick(RoomId roomId, ParticipantId participantId) {
         if (!roomService.roomExists(roomId)) {
             throw new RoomNotFoundException(roomId);
         }
         roomService.kick(roomId, participantId);
     }
 
-    void mute(RoomId roomId, ParticipantId participantId) {
+    public void mute(RoomId roomId, ParticipantId participantId) {
         if (!roomService.roomExists(roomId)) {
             throw new RoomNotFoundException(roomId);
         }
         roomService.mute(roomId, participantId);
     }
 
-    void unmute(RoomId roomId, ParticipantId participantId) {
+    public void unmute(RoomId roomId, ParticipantId participantId) {
         if (!roomService.roomExists(roomId)) {
             throw new RoomNotFoundException(roomId);
         }
