@@ -1,0 +1,40 @@
+#management:
+#  endpoints:
+#    enabled-by-default: false
+#
+#spring:
+#  autoconfigure:
+#    exclude:
+#      - org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration
+#      - org.springframework.boot.autoconfigure.security.oauth2.client.servlet.OAuth2ClientAutoConfiguration
+#      - org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration
+#      - org.springframework.cloud.netflix.eureka.EurekaClientAutoConfiguration
+#      - org.springframework.amqp.rabbit.annotation.RabbitAutoConfiguration
+#      - org.springframework.boot.autoconfigure.flyway.FlywayAutoConfiguration
+#      - org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration
+#      - org.springframework.boot.autoconfigure.jdbc.DataSourceTransactionManagerAutoConfiguration
+#      - org.springframework.boot.autoconfigure.orm.jpa.HibernateJpaAutoConfiguration
+#  flyway:
+#    enabled: false
+#
+#jpa:
+#  hibernate:
+#    ddl-auto: create-drop
+#  show-sql: true
+#  properties:
+#    hibernate:
+#      format_sql: true
+#      dialect: org.hibernate.dialect.PostgreSQLDialect
+#
+#security:
+#  basic:
+#    enabled: false
+#
+#
+#
+#logging:
+#  level:
+#    org.springframework.boot.autoconfigure: DEBUG
+#    org.springframework.security: DEBUG
+#    org.springframework.cloud.netflix.eureka: DEBUG
+#    org.springframework.amqp: DEBUG
